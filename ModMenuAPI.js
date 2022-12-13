@@ -155,6 +155,6 @@ function ModMenu(title, tabs, rootDivId = "menu") {
     }
   `);
     document.body.appendChild(this.rootDiv);
-    this._dragElement(document.getElementById(rootDivId));
+    this._dragElement(document.getElementById(this.id));
   };
 }
