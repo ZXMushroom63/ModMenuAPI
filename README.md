@@ -29,3 +29,9 @@ modmenu.init()
 </code>
 <br>
 <br>
+<br>
+To have multiple menus on one page you have to give each of them an id.<br>
+Modify the third line of code to have an id, where the third input is the id.<br>
+<code>
+var modmenu = new ModMenu(&quot;Mod Menu&quot;, tabs, &quot;exampleId&quot;);
+</code>
