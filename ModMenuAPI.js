@@ -17,6 +17,7 @@ function ModMenu(title, tabs, rootDivId = "menu") {
     } else {
       /*/otherwise, move the DIV from anywhere inside the DIV:/*/
       elmnt.onmousedown = dragMouseDown;
+      elmnt.ontouchstart = dragMouseDown;
     }
 
     function dragMouseDown(e) {
@@ -26,8 +27,11 @@ function ModMenu(title, tabs, rootDivId = "menu") {
       pos3 = e.clientX;
       pos4 = e.clientY;
       document.onmouseup = closeDragElement;
+      document.ontouchend = closeDragElement;
+      document.ontouchcancel = closeDragElement;
       /*/ call a function whenever the cursor moves:/*/
       document.onmousemove = elementDrag;
+      document.ontouchmove = elementDrag;
     }
 
     function elementDrag(e) {
@@ -47,6 +51,9 @@ function ModMenu(title, tabs, rootDivId = "menu") {
       /*/ stop moving when mouse button is released:/*/
       document.onmouseup = null;
       document.onmousemove = null;
+      document.ontouchend = null;
+      document.ontouchcancel = null;
+      document.ontouchmove = null;
     }
   };
   this.tabs = tabs;
@@ -80,9 +87,9 @@ function ModMenu(title, tabs, rootDivId = "menu") {
   this.closeModMenu = function () {
     document.getElementById(rootDivId).remove();
   };
-  this.rootDiv.id = rootDivId;
+  this.rootDiv.id = this.id;
   this.rootDiv.innerHTML = `
-  <div id="${rootDivId}header" title="Made with ModMenuApi by Robert Pirtea.">${title}<a class="button-7" href="javascript:this.parentElement.parentElement.remove()">✖</a></div>${this._parseTabsBar(
+  <div id="${this.id}header" title="Made with ModMenuApi by Robert Pirtea.">${this.title}<a class="button-7" href="javascript:this.parentElement.parentElement.remove()">✖</a></div>${this._parseTabsBar(
     this.tabs
   )}${this._parseTabsContent(this.tabs)}
   `;
