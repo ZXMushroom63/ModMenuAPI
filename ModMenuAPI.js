@@ -14,6 +14,7 @@ function ModMenu(title, tabs, rootDivId = "menu") {
     if (document.getElementById(elmnt.id + "header")) {
       /*/ if present, the header is where you move the DIV from:/*/
       document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+      document.getElementById(elmnt.id + "header").ontouchstart = dragMouseDown;
     } else {
       /*/otherwise, move the DIV from anywhere inside the DIV:/*/
       elmnt.onmousedown = dragMouseDown;
