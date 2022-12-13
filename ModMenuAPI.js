@@ -86,11 +86,11 @@ function ModMenu(title, tabs, rootDivId = "menu") {
     return html;
   };
   this.closeModMenu = function () {
-    document.getElementById(rootDivId).remove();
+    this.rootDiv.remove();
   };
   this.rootDiv.id = this.id;
   this.rootDiv.innerHTML = `
-  <div id="${this.id}header" title="Made with ModMenuApi by Robert Pirtea.">${this.title}<a class="button-7" href="javascript:this.parentElement.parentElement.remove()">✖</a></div>${this._parseTabsBar(
+  <div id="${this.id}header" title="Made with ModMenuApi by Robert Pirtea.">${this.title}<a style="background-color:red;" onclick="document.getElementById('${this.id}').remove()">✖</a></div>${this._parseTabsBar(
     this.tabs
   )}${this._parseTabsContent(this.tabs)}
   `;
@@ -157,6 +157,6 @@ function ModMenu(title, tabs, rootDivId = "menu") {
     }
   `);
     document.body.appendChild(this.rootDiv);
-    this._dragElement(document.getElementById(this.id));
+    this._dragElement(this.rootDiv);
   };
 }
