@@ -119,6 +119,7 @@ function ModMenu(title, tabs, rootDivId = "menu") {
         height:45%;
         resize:both;
         overflow-y:scroll;
+        top:0;
     }
     #${rootDivId}header {
         padding: 10px;
