@@ -39,10 +39,10 @@ function ModMenu(title, tabs, rootDivId = "menu") {
       e = e || window.event;
       e.preventDefault();
       /*/ calculate the new cursor position:/*/
-      pos1 = pos3 - e.clientX;
-      pos2 = pos4 - e.clientY;
-      pos3 = e.clientX;
-      pos4 = e.clientY;
+      pos1 = pos3 - (e.clientX || e.touches[0].clientX);
+      pos2 = pos4 - (e.clientY || e.touches[0].clientY);
+      pos3 = (e.clientX || e.touches[0].clientX);
+      pos4 = (e.clientY || e.touches[0].clientY);
       /*/ set the element's new position:/*/
       elmnt.style.top = elmnt.offsetTop - pos2 + "px";
       elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
@@ -86,11 +86,11 @@ function ModMenu(title, tabs, rootDivId = "menu") {
     return html;
   };
   this.closeModMenu = function () {
-    this.rootDiv.remove();
+    document.getElementById(rootDivId).remove();
   };
   this.rootDiv.id = this.id;
   this.rootDiv.innerHTML = `
-  <div id="${this.id}header" title="Made with ModMenuApi by Robert Pirtea.">${this.title}<a style="background-color:red;" onclick="document.getElementById('${this.id}').remove()">✖</a></div>${this._parseTabsBar(
+  <div id="${this.id}header" title="Made with ModMenuApi by Robert Pirtea.">${this.title}<a class="button-7" href="javascript:this.parentElement.parentElement.remove()">✖</a></div>${this._parseTabsBar(
     this.tabs
   )}${this._parseTabsContent(this.tabs)}
   `;
@@ -119,7 +119,6 @@ function ModMenu(title, tabs, rootDivId = "menu") {
         height:45%;
         resize:both;
         overflow-y:scroll;
-        top:0;
     }
     #${rootDivId}header {
         padding: 10px;
@@ -157,6 +156,6 @@ function ModMenu(title, tabs, rootDivId = "menu") {
     }
   `);
     document.body.appendChild(this.rootDiv);
-    this._dragElement(this.rootDiv);
+    this._dragElement(document.getElementById(this.id));
   };
 }
