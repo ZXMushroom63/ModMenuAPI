@@ -142,7 +142,7 @@ function ModMenu(title, tabs, rootDivId = "menu", style = undefined) {
   this.init = function () {
     this.rootDiv.id = this.id;
     this.rootDiv.innerHTML = `
-    <div id="${this.id}header" title="Made with ModMenuApi by Robert Pirtea.">${
+    <div id="${this.id}header" title="Made with ModMenuApi by ZXMushroom63 on GitHub.">${
       this.title
     }<a class="button-7" href="#" onclick="document.getElementById('${this.id}').remove()">✖</a></div>${this._parseTabsBar(
       this.tabs
