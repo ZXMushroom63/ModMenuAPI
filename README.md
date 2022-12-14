@@ -35,3 +35,33 @@ Modify the third line of code to have an id, where the third input is the id.<br
 <code>
 var modmenu = new ModMenu(&quot;Mod Menu&quot;, tabs, &quot;exampleId&quot;);
 </code>
+<br>
+<br>
+<br>
+<h2>How to style the mod menu</h2><br>
+First, to style the menu you have to create a new ModMenuStyle variable.<br>
+<code>
+var style = new ModMenuStyle()
+</code>
+<br>
+<br>
+Then, set different aspects using it's functions:<br>
+<code>
+style.setBackgroundColor("red");
+</code><br><code>
+style.setHeaderTextColor("#32a852");
+</code><br><code>
+style.setWidth("30%");
+</code>
+<br>
+<br>
+When you create the modmenu, give it an id and pass in the style object.<br>
+<code>
+var modmenu = new ModMenu("Example Mod Menu", tabs, "InsertIdHere", <u>style</u>)
+</code>
+<br>
+<br>
+Then just initialize the mod menu as normal.<br>
+<code>
+modmenu.init()
+</code>
