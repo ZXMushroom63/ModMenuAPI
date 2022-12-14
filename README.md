@@ -1,7 +1,7 @@
 # ModMenuAPI
 An easy to use javascript api to make mod-menus for the web easily.<br>
 <br>
-<a href="exampleMenu.js">Pss! To see a full example, click here!</a>
+<a href="exampleMenu.js">Psst! To see a full example, click here!</a>
 <br>
 <br>
 How to make a menu (Assuming you ran the code in <a href="ModMenuAPI.js">ModMenuAPI.js</a>):<br>
