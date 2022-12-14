@@ -4,8 +4,59 @@ function ModMenuTabList() {
     this._tabs[name] = html;
   };
 }
-
-function ModMenu(title, tabs, rootDivId = "menu") {
+function ModMenuStyle() {
+  this._style = {
+    background: "#f1f1f1",
+    headerBackground: "#2196F3",
+    headerText: "#fff",
+    tabBarBackground: "#f1f1f1",
+    tabHover: "#ddd",
+    tabActive: "#ccc",
+    width: "30%",
+    height: "45%",
+  };
+  this.setBackgroundColor = function (CSSColor) {
+    this._style["background"] = CSSColor;
+  };
+  this.setHeaderBackgroundColor = function (CSSColor) {
+    this._style["headerBackground"] = CSSColor;
+  };
+  this.setHeaderTextColor = function (CSSColor) {
+    this._style["headerText"] = CSSColor;
+  };
+  this.setTabBarBackgroundColor = function (CSSColor) {
+    this._style["tabBarBackground"] = CSSColor;
+  };
+  this.setTabHoverColor = function (CSSColor) {
+    this._style["tabHover"] = CSSColor;
+  };
+  this.setTabactiveColor = function (CSSColor) {
+    this._style["tabActive"] = CSSColor;
+  };
+  this.setWidth = function (CSSPercentage) {
+    this._style["width"] = CSSPercentage;
+  };
+  this.setHeight = function (CSSPercentage) {
+    this._style["height"] = CSSPercentage;
+  };
+}
+function ModMenu(title, tabs, rootDivId = "menu", style = undefined) {
+  if (style === undefined) {
+    this.style = {
+      _style: {
+        background: "#f1f1f1",
+        headerBackground: "#2196F3",
+        headerText: "#fff",
+        tabBarBackground: "#f1f1f1",
+        tabHover: "#ddd",
+        tabActive: "#ccc",
+        width: "30%",
+        height: "45%",
+      },
+    };
+  } else {
+    this.style = style;
+  }
   this._dragElement = function (elmnt) {
     var pos1 = 0,
       pos2 = 0,
@@ -41,8 +92,8 @@ function ModMenu(title, tabs, rootDivId = "menu") {
       /*/ calculate the new cursor position:/*/
       pos1 = pos3 - (e.clientX || e.touches[0].clientX);
       pos2 = pos4 - (e.clientY || e.touches[0].clientY);
-      pos3 = (e.clientX || e.touches[0].clientX);
-      pos4 = (e.clientY || e.touches[0].clientY);
+      pos3 = e.clientX || e.touches[0].clientX;
+      pos4 = e.clientY || e.touches[0].clientY;
       /*/ set the element's new position:/*/
       elmnt.style.top = elmnt.offsetTop - pos2 + "px";
       elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
@@ -86,15 +137,17 @@ function ModMenu(title, tabs, rootDivId = "menu") {
     return html;
   };
   this.closeModMenu = function () {
-    document.getElementById(rootDivId).remove();
+    document.getElementById(this.id).remove();
   };
-  this.rootDiv.id = this.id;
-  this.rootDiv.innerHTML = `
-  <div id="${this.id}header" title="Made with ModMenuApi by Robert Pirtea.">${this.title}<a class="button-7" href="javascript:this.parentElement.parentElement.remove()">✖</a></div>${this._parseTabsBar(
-    this.tabs
-  )}${this._parseTabsContent(this.tabs)}
-  `;
   this.init = function () {
+    this.rootDiv.id = this.id;
+    this.rootDiv.innerHTML = `
+    <div id="${this.id}header" title="Made with ModMenuApi by Robert Pirtea.">${
+      this.title
+    }<a class="button-7" href="#" onclick="document.getElementById('${this.id}').remove()">✖</a></div>${this._parseTabsBar(
+      this.tabs
+    )}${this._parseTabsContent(this.tabs)}
+    `;
     window.MODMENU_OpenTab = function (evt, cityName) {
       var i, tabcontent, tablinks;
       tabcontent = document.getElementsByClassName("tabcontent");
@@ -113,25 +166,27 @@ function ModMenu(title, tabs, rootDivId = "menu") {
         all:initial;
         position: fixed;
         z-index: 89999999;
-        background-color: #f1f1f1;
+        background-color: ${this.style._style.background};
         border: 1px solid #d3d3d3;
-        width:30%;
-        height:45%;
+        width:${this.style._style.width};
+        height:${this.style._style.height};
         resize:both;
         overflow-y:scroll;
+        top:0;
+        left:0;
     }
     #${rootDivId}header {
         padding: 10px;
         cursor: move;
         z-index: 99999999;
-        background-color: #2196F3;
-        color: #fff;
+        background-color: ${this.style._style.headerBackground};
+        color: ${this.style._style.headerText};
         text-align: center;
     }
     .tab {
         overflow: hidden;
         border: 1px solid #ccc;
-        background-color: #f1f1f1;
+        background-color: ${this.style._style.tabBarBackground};
     }
     .tab button {
         background-color: inherit;
@@ -143,10 +198,10 @@ function ModMenu(title, tabs, rootDivId = "menu") {
         transition: 0.3s;
     }
     .tab button:hover {
-        background-color: #ddd;
+        background-color: ${this.style._style.tabHover};
     }
     .tab button.active {
-        background-color: #ccc;
+        background-color: ${this.style._style.tabActive};
     }
     .tabcontent {
         display: none;
