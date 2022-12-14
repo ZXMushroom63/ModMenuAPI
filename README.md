@@ -65,3 +65,15 @@ Then just initialize the mod menu as normal.<br>
 <code>
 modmenu.init()
 </code>
+<br>
+<br>
+<br>
+<h2>Known Issues</h2>
+Certain sites will not allow tabs and buttons to be clicked.<br>
+Sites:<br>
+<ul>
+  <li>github.com</li>
+  <li>google.com</li>
+  <li>nearly all *.google.com sites</li>
+  <li>etc.</li>
+</ul>
